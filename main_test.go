@@ -69,9 +69,19 @@ func TestBuscaUmAlunoPorCPFHandler(t *testing.T) {
 
 	r := SetupDasRotasDeTeste()
 	r.GET("/alunos/cpf/:cpf", controllers.BuscaAlunoPorCPF)
+
+	// Aluno existente
 	req, _ := http.NewRequest("GET", "/alunos/cpf/"+alunoTeste.CPF, nil)
 	resposta := httptest.NewRecorder()
 	r.ServeHTTP(resposta, req)
 	assert.Equal(t, http.StatusOK, resposta.Code, "Deveriam ser iguais")
 
+	// Aluno nao existente
+	req, _ = http.NewRequest("GET", "/alunos/cpf/0", nil)
+	resposta = httptest.NewRecorder()
+	r.ServeHTTP(resposta, req)
+	assert.Equal(t, http.StatusNotFound, resposta.Code, "Deveriam ser iguais")
+	mockDaResposta := `{"Not found":"Aluno nao encontrado"}`
+	respostaBody, _ := ioutil.ReadAll(resposta.Body)
+	assert.Equal(t, mockDaResposta, string(respostaBody))
 }
