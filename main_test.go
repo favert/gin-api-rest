@@ -67,7 +67,6 @@ func TestListandoTodosOsAlunosHandler(t *testing.T) {
 func TestBuscaUmAlunoPorCPFHandler(t *testing.T) {
 	database.ConectaComBancoDeDados()
 	alunoTeste := CriaAlunoMock()
-	//fmt.Println(alunoTeste)
 	defer DeletaAlunoMock()
 
 	r := SetupDasRotasDeTeste()
@@ -85,7 +84,7 @@ func TestBuscaUmAlunoPorCPFHandler(t *testing.T) {
 	r.ServeHTTP(resposta, req)
 	assert.Equal(t, http.StatusNotFound, resposta.Code, "Deveriam ser iguais")
 	mockDaResposta := `{"Not found":"Aluno nao encontrado"}`
-	respostaBody, _ := ioutil.ReadAll(resposta.Body)
+	respostaBody, _ := io.ReadAll(resposta.Body)
 	assert.Equal(t, mockDaResposta, string(respostaBody))
 }
 
@@ -95,7 +94,7 @@ func TestBuscaAlunoPorIdHandler(t *testing.T) {
 	defer DeletaAlunoMock()
 
 	r := SetupDasRotasDeTeste()
-	r.GET("/alunos/:id", controllers.ExibeTodosAlunos)
+	r.GET("/alunos/:id", controllers.BuscaUmAlunoPorID)
 	pathDaBusca := "/alunos/" + strconv.Itoa(ID)
 	req, _ := http.NewRequest("GET", pathDaBusca, nil)
 	resposta := httptest.NewRecorder()
