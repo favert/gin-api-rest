@@ -6,8 +6,21 @@ import (
 	"github.com/favert/api-go-gin/database"
 	"github.com/favert/api-go-gin/models"
 	"github.com/gin-gonic/gin"
+	_ "github.com/swaggo/swag/example/celler/httputil"
 )
 
+// ExibeTodosAlunos godoc
+//
+//	@Summary		Exibir todos os alunos
+//	@Description	Exibe alunos
+//	@Tags			alunos
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	models.Aluno
+//	@Failure		400	{object}	httputil.HTTPError
+//	@Failure		404	{object}	httputil.HTTPError
+//	@Failure		500	{object}	httputil.HTTPError
+//	@Router			/alunos [get]
 func ExibeTodosAlunos(c *gin.Context) {
 	var alunos []models.Aluno
 	database.DB.Find(&alunos)
@@ -52,6 +65,19 @@ func DeletaUmAluno(c *gin.Context) {
 
 }
 
+// BuscaUmAlunoPorID godoc
+//
+//	@Summary		Exibir um aluno
+//	@Description	Exibe aluno pelo id
+//	@Tags			alunos
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path		int	true	"ID do Aluno"
+//	@Success		200	{object}	models.Aluno
+//	@Failure		400	{object}	httputil.HTTPError
+//	@Failure		404	{object}	httputil.HTTPError
+//	@Failure		500	{object}	httputil.HTTPError
+//	@Router			/alunos/{id} [get]
 func BuscaUmAlunoPorID(c *gin.Context) {
 	var aluno models.Aluno
 	id := c.Params.ByName("id")
