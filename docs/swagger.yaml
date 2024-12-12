@@ -63,6 +63,39 @@ paths:
       summary: Exibir todos os alunos
       tags:
       - alunos
+    post:
+      consumes:
+      - application/json
+      description: Recebe json e cria aluno
+      parameters:
+      - description: Cria aluno
+        in: body
+        name: aluno
+        required: true
+        schema:
+          $ref: '#/definitions/models.Aluno'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Aluno'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Cria um aluno
+      tags:
+      - alunos
   /alunos/{id}:
     get:
       consumes:

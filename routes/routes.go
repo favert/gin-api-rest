@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/favert/api-go-gin/controllers"
-	docs "github.com/favert/gin-api-test/docs"
+	docs "github.com/favert/api-go-gin/docs"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

@@ -34,6 +34,19 @@ func Saudacao(c *gin.Context) {
 	})
 }
 
+// CriaNovoAluno godoc
+//
+//	@Summary		Cria um aluno
+//	@Description	Recebe json e cria aluno
+//	@Tags			alunos
+//	@Accept			json
+//	@Produce		json
+//	@Param			aluno	body		models.Aluno	true	"Cria aluno"
+//	@Success		200		{object}	models.Aluno
+//	@Failure		400		{object}	httputil.HTTPError
+//	@Failure		404		{object}	httputil.HTTPError
+//	@Failure		500		{object}	httputil.HTTPError
+//	@Router			/alunos [post]
 func CriaNovoAluno(c *gin.Context) {
 	var aluno models.Aluno
 	if err := c.ShouldBindJSON(&aluno); err != nil {
