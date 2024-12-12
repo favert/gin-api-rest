@@ -26,3 +26,8 @@ go.work.sum
 
 #postgres folder created by docker compose up command
 /postgres-data
+/docs
+.gitignore
+docs/swagger.json
+docs/docs.go
+docs/swagger.yaml
